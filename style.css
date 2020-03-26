@@ -1,0 +1,67 @@
+body {
+    font-family: 'Exo 2', sans-serif;
+    background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.8));
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    height: 100vh;
+    width: 100vw;
+}
+
+header {
+    display: block;
+    text-align: center;
+}
+
+#rules {
+    display: block;
+    text-align: center;
+}
+
+#playcontainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+#playcontainer .icon {
+    padding: 2rem 3rem;
+    border-radius: 8%;
+    margin: 0 5%;
+}
+
+#playcontainer .icon:hover {
+    background-color: rgba(255, 255, 255, 0.815);
+    color: rgba(46, 53, 59, 0.863)
+}
+
+#playcontainer .icon:hover i{
+    color: rgba(46, 53, 59, 0.863)
+}
+
+#playcontainer i {
+    font-size: 5rem;
+    color: rgba(255, 255, 255, 0.815);
+}
+
+header h1 {
+    font-family: 'Stalinist One', cursive;
+    font-size: 3rem;
+}
+
+p {
+    font-size: 1.3rem;
+}
+
+#rock i {
+    transform: rotate(90deg);
+}
+
+#paper i {
+    transform: rotate(90deg);
+}
+
+#scissors i {
+    transform: rotate(180deg);
+    transform: scaleX(-1);
+}

@@ -3,88 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock, Paper, Scissors</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Exo+2|Stalinist+One&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5bef2bea5a.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <script>
-        let pWins = 0;
-        let cWins = 0;
-        function computerPlay () {
-            numGen = Math.floor(Math.random() * 3);
-            switch(true){
-                case numGen >= 2:
-                    return "rock";
-                    break;
-                case numGen < 2 && numGen >= 1:
-                    return "paper";
-                    break;
-                default:
-                   return "scissors"; 
-            }
-        }
-        function humanPlay () {
-            let decision = prompt("Choose rock, paper, or scissors:");
-            decision = decision.toLowerCase();
-              if (decision == "rock" || decision == "paper" || decision == "scissors") {
-                return decision;
-            } 
-            else { 
-            alert("Invalid selection");
-            decision = null;
-            }
-        }
-        function playRound (playerSelection, computerSelection) {
-            if (playerSelection == computerSelection){
-                return `You both threw ${playerSelection}. It's a tie!`;
-            } else if (playerSelection == "rock") {
-                if (computerSelection == "scissors") {
-                    pWins++;
-                    return "You win! Rock crushes scissors.";
-                } else {
-                    cWins++;
-                    return "You lose. Paper covers rock.";
-                }
-            }
-            else if (playerSelection == "paper") {
-                if (computerSelection == "rock") {
-                    pWins++;
-                    return "You win! Paper covers rock.";
-                } else {
-                    cWins++;
-                    return "You lose. Scissors cut paper.";
-                }
-            }
-            else if (playerSelection == "scissors") {
-                if (computerSelection == "paper") {
-                    pWins++;
-                    return "You win! Scissors cut paper.";
-                } else {
-                    cWins++;
-                    return "You lose. Rock crushes scissors.";
-                }
-            }
-            else {
-                return "error";
-            }
-        }
-        
-        function game () {
-            for (i=0; i<5; i++) {
-                console.log(playRound(humanPlay(), computerPlay()));
-            }
-            
-            if (pWins > cWins) {
-                console.log(`You win, ${pWins} to ${cWins}!`);
-            } else if (pWins < cWins) {
-                console.log(`You lose, ${pWins} to ${cWins}.`);
-            } else {
-                console.log(`It's a tie, ${pWins} to ${cWins}`);
-            }
-        }
-        game ();
+    <header id="header">
+        <h1>Rock, Paper, Scissors</h1>
+    </header>
+    <div id="rules">
+        <p>You will play a best-of-five game of rock, paper, scissors against the computer.</p>
+        <p>Remember, rock beats scissors, scissors beats paper, paper beats rock.</p>
+        <p>Ties will not count in the game tally.</p>
+        <p>When you're ready, choose your weapon:</p>
+    </div>
+    <div id="playcontainer">
+        <div class="icon" id="rock" keyval="rock">
+            <h2><i class="far fa-hand-rock"></i></h2>
+        </div>
+        <div class="icon" id="paper" keyval="paper">
+            <h2><i class="far fa-hand-paper"></i></h2>
+        </div>
+        <div class="icon" id="scissors" keyval="scissors">
+            <h2><i class="far fa-hand-scissors"></i></h2>
+        </div>
+    </div>
+    <script src="script.js">
     </script>
-
-
-
 </body>
 </html>
