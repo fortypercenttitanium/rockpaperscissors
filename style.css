@@ -4,24 +4,33 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
+    overflow: hidden;
     height: 100vh;
-    width: 100vw;
 }
 
 header {
     display: block;
     text-align: center;
+    max-height: 20%;
+}
+
+header h1 {
+    font-family: 'Stalinist One', cursive;
+    font-size: 4rem;
 }
 
 #rules {
     display: block;
     text-align: center;
+    font-size: 2rem;
 }
 
 #playcontainer {
     display: flex;
     justify-content: center;
-    margin-top: 4rem;
+    width: 100%;
+    position: fixed;
+    top: 40%;
 }
 
 #playcontainer .icon {
@@ -30,9 +39,14 @@ header {
     margin: 0 5%;
 }
 
-#playcontainer .icon:hover {
+#playcontainer .icon:hover, #playcontainer .icon .active {
     background-color: rgba(255, 255, 255, 0.815);
-    color: rgba(46, 53, 59, 0.863)
+    color: rgba(46, 53, 59, 0.863);
+    cursor: pointer;
+}
+
+#playcontainer .icon:hover {
+    cursor: pointer;
 }
 
 #playcontainer .icon:hover i{
@@ -42,11 +56,6 @@ header {
 #playcontainer i {
     font-size: 5rem;
     color: rgba(255, 255, 255, 0.815);
-}
-
-header h1 {
-    font-family: 'Stalinist One', cursive;
-    font-size: 3rem;
 }
 
 p {
@@ -64,4 +73,65 @@ p {
 #scissors i {
     transform: rotate(180deg);
     transform: scaleX(-1);
+}
+
+#result {
+    display: block;
+    text-align: center;
+    margin-top: 4rem;
+    margin-bottom: 2.7rem;
+    font-size: 2rem;
+    font-weight: bold;
+    animation: slide-in 0.5s forwards;
+}
+
+#resultcounter {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: fixed;
+    top: 70%;
+}
+
+#resultcounter span{
+    width: 20vw;
+}
+
+.wincount {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+@media screen and (max-width: 800px){
+    header h1 {
+        font-size: 2rem;
+    }
+    #rules {
+        max-height: 20vh;
+    }
+    #rules p {
+        font-size: 1rem;
+    }
+    #playcontainer {
+        top: 50%;
+    }
+
+    #playcontainer i {
+        font-size: 3rem;
+    }
+    #playcontainer .icon {
+        padding: 2% 5%;
+    }
+    #result {
+        margin: 5%;
+        font-size: 1.5rem;
+    }
+    #resultcounter {
+        margin-top: 0;
+        top: 80%;
+    }
+    #resultcounter span {
+        font-size: 1rem;
+        margin: 5%;
+    }
 }
