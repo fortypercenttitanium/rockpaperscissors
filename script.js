@@ -9,6 +9,16 @@ let pWinCount = document.createElement("span");
 let cWinCount = document.createElement("span");
 pWinCount.setAttribute("class", "wincount");
 cWinCount.setAttribute("class", "wincount");
+//game end modal box
+let modal = document.querySelector("#modal");
+let gameEndMessage = modal.querySelector("#game-end p");
+let restartBtn = modal.querySelector("#restart");
+let closeBtn = modal.querySelector("#close");
+restartBtn.addEventListener("click", () => location.reload());
+closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+    document.querySelector("#playcontainer").style.display = "none";    
+});
 //RNG computer play
 function computerPlay () {
     numGen = Math.floor(Math.random() * 3);
@@ -77,12 +87,12 @@ function playRound (playerSelection, computerSelection) {
     }
     //win and lose condition with a reload to try again
     if (pWins == 5){
-        alert(`You win, ${pWins} to ${cWins}! Rematch?`)
-        location.reload();
+        gameEndMessage.textContent = `You win, ${pWins} to ${cWins}! Rematch?`
+        modal.style.display = "block"
     }
     if (cWins == 5){
-        alert(`You lose, ${pWins} to ${cWins}. Try again!`)
-        location.reload();
+        gameEndMessage.textContent = `You lose, ${pWins} to ${cWins}. Try again?`
+        modal.style.display = "block"
     }
 }
 //player selection, and begin the game.
