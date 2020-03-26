@@ -30,7 +30,7 @@ header h1 {
     justify-content: center;
     width: 100%;
     position: fixed;
-    top: 40%;
+    top: 50%;
 }
 
 #playcontainer .icon {
@@ -128,6 +128,8 @@ p {
     padding: 1rem;
     margin: 0 2%;
     border-radius: 10%;
+    background-color: lightgrey;
+    color: black;
 }
 
 @media screen and (max-width: 800px){
@@ -151,7 +153,7 @@ p {
         padding: 2% 5%;
     }
     #result {
-        margin: 5%;
+        margin-top: 10%;
         font-size: 1.5rem;
     }
     #resultcounter {
@@ -161,5 +163,11 @@ p {
     #resultcounter span {
         font-size: 1rem;
         margin: 5%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    header h1 {
+        font-size: 1.5rem;
     }
 }
