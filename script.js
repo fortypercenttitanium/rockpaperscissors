@@ -1,89 +1,97 @@
 //set score
 let pWins = 0;
 let cWins = 0;
-//prep elements to be appended when the score is tallied
-let body = document.querySelector('body');
-let pWinCount = document.createElement('span');
-let cWinCount = document.createElement('span');
-pWinCount.setAttribute('class', 'wincount');
-cWinCount.setAttribute('class', 'wincount');
-//game end modal box
-let modal = document.querySelector('#modal');
-let gameEndMessage = modal.querySelector('#game-end p');
-let restartBtn = modal.querySelector('#restart');
-let closeBtn = modal.querySelector('#close');
-restartBtn.addEventListener('click', () => location.reload());
+
+//prep DOM elements
+const pWinCount = document.createElement('span');
+const cWinCount = document.createElement('span');
+pWinCount.classList.add('wincount');
+cWinCount.classList.add('wincount');
+
+const body = document.querySelector('body');
+const modal = document.querySelector('#modal');
+const gameEndMessage = modal.querySelector('#game-end p');
+const restartBtn = modal.querySelector('#restart');
+const closeBtn = modal.querySelector('#close');
+const playContainer = document.querySelector('#playcontainer')
+const gameWindow = document.querySelector('.rules-result-container');
+const turnResultText = gameWindow.querySelector('.turn-result');
+const rules = document.querySelector('#rules')
+
+restartBtn.addEventListener('click', () => window.location.reload());
 closeBtn.addEventListener('click', () => {
 	modal.style.display = 'none';
-	document.querySelector('#playcontainer').style.display = 'none';
+	playContainer.style.display = 'none';
 });
+
 //RNG computer play
 function computerPlay() {
 	numGen = Math.floor(Math.random() * 3);
 	switch (true) {
-		case numGen >= 2:
+		case numGen === 2:
 			return 'rock';
-			break;
-		case numGen < 2 && numGen >= 1:
+		case numGen === 1:
 			return 'paper';
-			break;
 		default:
 			return 'scissors';
 	}
 }
-//game mechanics
+
 function playRound(playerSelection, computerSelection) {
-	document.querySelector('#rules').textContent = '';
-	const gameWindow = document.querySelector('.rules-result-container');
-	//feedback on what happened
-	const text = gameWindow.querySelector('.turn-result');
-	text.textContent = `You throw ${playerSelection}. Computer throws ${computerSelection}.`;
-	gameWindow.appendChild(text);
-	//if it's the first throw, make a result window and insert it where the rules were
-	if (!document.querySelector('#result')) {
-		const result = document.createElement('div');
-		result.setAttribute('id', 'result');
-		gameWindow.insertBefore(result, gameWindow.lastChild);
-	}
-	if (playerSelection == computerSelection) {
-		result.textContent = `It's a tie!`;
-	} else if (playerSelection == 'rock') {
-		if (computerSelection == 'scissors') {
+	let result;
+	rules.remove();
+
+	turnResultText.textContent = `You throw ${playerSelection}. Computer throws ${computerSelection}.`;
+	
+	const resultContainer = document.createElement('div');
+	resultContainer.id = 'result';
+
+	if (playerSelection === computerSelection) {
+		result = `It's a tie!`;
+	} else if (playerSelection === 'rock') {
+		if (computerSelection === 'scissors') {
 			pWins++;
-			result.textContent = 'You win! Rock crushes scissors.';
+			result = 'You win! Rock crushes scissors.';
 		} else {
 			cWins++;
-			result.textContent = 'You lose. Paper covers rock.';
+			result = 'You lose. Paper covers rock.';
 		}
-	} else if (playerSelection == 'paper') {
-		if (computerSelection == 'rock') {
+	} else if (playerSelection === 'paper') {
+		if (computerSelection === 'rock') {
 			pWins++;
-			result.textContent = 'You win! Paper covers rock.';
+			result = 'You win! Paper covers rock.';
 		} else {
 			cWins++;
-			result.textContent = 'You lose. Scissors cut paper.';
+			result = 'You lose. Scissors cut paper.';
 		}
-	} else if (playerSelection == 'scissors') {
-		if (computerSelection == 'paper') {
+	} else if (playerSelection === 'scissors') {
+		if (computerSelection === 'paper') {
 			pWins++;
-			result.textContent = 'You win! Scissors cut paper.';
+			result = 'You win! Scissors cut paper.';
 		} else {
 			cWins++;
-			result.textContent = 'You lose. Rock crushes scissors.';
+			result = 'You lose. Rock crushes scissors.';
 		}
 	} else {
 		return 'error';
 	}
+
+	resultContainer.textContent = result;
+	if (document.querySelector('#result')){
+		gameWindow.removeChild(document.querySelector('#result'))
+	}
+	gameWindow.insertBefore(resultContainer, gameWindow.lastChild);
 	//log the current win count
 	pWinCount.textContent = `Your wins: ${pWins}`;
 	cWinCount.textContent = `Computer wins: ${cWins}`;
-
+	
 	const resultCounter = document.createElement('div');
 	resultCounter.id = 'resultcounter';
+	
 	gameWindow.appendChild(resultCounter);
 	resultCounter.appendChild(pWinCount);
 	resultCounter.appendChild(cWinCount);
-
+	
 	//win and lose condition with a reload to try again
 	if (pWins == 5) {
 		gameEndMessage.textContent = `You win, ${pWins} to ${cWins}! Rematch?`;
@@ -94,6 +102,7 @@ function playRound(playerSelection, computerSelection) {
 		modal.style.display = 'block';
 	}
 }
+
 //player selection, and begin the game.
 const icons = document.querySelectorAll('.icon');
 [...icons].forEach((item) => {
